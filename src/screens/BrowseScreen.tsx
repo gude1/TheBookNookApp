@@ -79,7 +79,11 @@ function BrowseListFooter({ isLoading, t }: BrowseListFooterProps) {
 function BrowseBookListItem({ book, onPress, t }: BrowseBookListItemProps) {
   return (
     <Pressable onPress={() => onPress(book.id)} style={styles.card}>
-      <Image source={{ uri: book.coverUrl }} style={styles.cover} />
+      <Image
+        resizeMode="cover"
+        source={{ uri: book.coverUrl }}
+        style={styles.cover}
+      />
       <View style={styles.cardContent}>
         <Text style={styles.cardTitle}>{book.title}</Text>
         <Text style={styles.cardAuthor}>
@@ -191,7 +195,7 @@ const styles = StyleSheet.create({
   },
   cover: {
     width: 72,
-    height: 108,
+    height: 72,
     borderRadius: 8,
     backgroundColor: '#ececec',
   },

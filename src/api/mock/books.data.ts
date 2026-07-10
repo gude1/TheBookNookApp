@@ -45,7 +45,7 @@ function createBook(index: number): Book {
     description:
       'A captivating story that explores memory, courage, and the quiet moments that change everything.',
     price: Number((9.99 + (index % 20) * 1.5).toFixed(2)),
-    coverUrl: `https://picsum.photos/seed/${id}/200/300`,
+    coverUrl: `https://picsum.photos/seed/${id}/200/200`,
     rating: Number((3.5 + (index % 15) * 0.1).toFixed(1)),
     reviewCount: 20 + index * 3,
   };

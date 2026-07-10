@@ -43,7 +43,11 @@ export function BookDetailsScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      <Image source={{ uri: data.coverUrl }} style={styles.cover} />
+      <Image
+        resizeMode="cover"
+        source={{ uri: data.coverUrl }}
+        style={styles.cover}
+      />
       <Text style={styles.title}>{data.title}</Text>
       <Text style={styles.author}>
         {t('bookDetails.byAuthor', { author: data.author })}
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
   },
   cover: {
     width: 160,
-    height: 240,
+    height: 160,
     borderRadius: 8,
     marginBottom: 20,
     backgroundColor: '#f0f0f0',
