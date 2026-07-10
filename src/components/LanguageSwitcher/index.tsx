@@ -1,19 +1,10 @@
 import { useState } from 'react';
-import {
-  Modal,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@react-native-vector-icons/ionicons/static';
 
 import { useLanguageStore } from '@/store';
-import {
-  SUPPORTED_LANGUAGES,
-  type SupportedLanguage,
-} from '@/utils';
+import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '@/utils';
 
 const LANGUAGE_LABEL_KEYS = {
   en: 'language.english',
@@ -24,10 +15,12 @@ type LanguageSwitcherProps = {
   variant?: 'default' | 'header';
 };
 
-export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps) {
+export function LanguageSwitcher({
+  variant = 'default',
+}: LanguageSwitcherProps) {
   const { t } = useTranslation();
-  const language = useLanguageStore((state) => state.language);
-  const setLanguage = useLanguageStore((state) => state.setLanguage);
+  const language = useLanguageStore(state => state.language);
+  const setLanguage = useLanguageStore(state => state.setLanguage);
   const [isOpen, setIsOpen] = useState(false);
   const isHeader = variant === 'header';
 
@@ -38,7 +31,9 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
 
   return (
     <View style={[styles.container, isHeader && styles.headerContainer]}>
-      {!isHeader ? <Text style={styles.label}>{t('language.label')}</Text> : null}
+      {!isHeader ? (
+        <Text style={styles.label}>{t('language.label')}</Text>
+      ) : null}
 
       <Pressable
         accessibilityRole="button"
@@ -47,7 +42,9 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
         onPress={() => setIsOpen(true)}
         style={[styles.trigger, isHeader && styles.headerTrigger]}
       >
-        <Text style={[styles.triggerText, isHeader && styles.headerTriggerText]}>
+        <Text
+          style={[styles.triggerText, isHeader && styles.headerTriggerText]}
+        >
           {t(LANGUAGE_LABEL_KEYS[language])}
         </Text>
         <Ionicons
@@ -70,7 +67,7 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
           onPress={() => setIsOpen(false)}
         >
           <View style={styles.menu}>
-            {SUPPORTED_LANGUAGES.map((code) => {
+            {SUPPORTED_LANGUAGES.map(code => {
               const isSelected = language === code;
 
               return (
@@ -79,7 +76,10 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
                   accessibilityRole="menuitem"
                   accessibilityState={{ selected: isSelected }}
                   onPress={() => handleSelect(code)}
-                  style={[styles.menuItem, isSelected && styles.menuItemSelected]}
+                  style={[
+                    styles.menuItem,
+                    isSelected && styles.menuItemSelected,
+                  ]}
                 >
                   <Text
                     style={[
