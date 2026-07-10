@@ -18,7 +18,9 @@
     "title": "Browse Books",
     "subtitle": "Find your next great read",
     "empty": "No books found.",
-    "loadMore": "Loading more books..."
+    "loadMore": "Loading more books...",
+    "searchPlaceholder": "Search by title or author",
+    "clearSearch": "Clear search"
   },
   "bookDetails": {
     "title": "Book Details",

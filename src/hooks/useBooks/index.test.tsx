@@ -73,4 +73,24 @@ describe('useBooks', () => {
     expect(output.data).toEqual(mockResponse);
     expect(output.error).toBeNull();
   });
+
+  it('passes the search query to fetchBooks', async () => {
+    jest.mocked(fetchBooks).mockResolvedValue(mockResponse);
+
+    function TestBooksWithQuery() {
+      const result = useBooks({ page: 1, query: 'jane' });
+      return <ResultDisplay {...result} />;
+    }
+
+    await ReactTestRenderer.act(async () => {
+      ReactTestRenderer.create(<TestBooksWithQuery />);
+      await Promise.resolve();
+    });
+
+    expect(fetchBooks).toHaveBeenCalledWith({
+      page: 1,
+      limit: 20,
+      query: 'jane',
+    });
+  });
 });

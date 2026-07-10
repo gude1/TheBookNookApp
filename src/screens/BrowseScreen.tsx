@@ -13,8 +13,11 @@ import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import type { TFunction } from 'i18next';
 
+import { SearchInput } from '@/components/SearchInput';
 import { useBooks, useScreenTitle } from '@/hooks';
 import type { Book } from '@/types';
+
+const SEARCH_DEBOUNCE_MS = 300;
 
 type BrowseBookListItemProps = {
   book: Book;
@@ -98,11 +101,29 @@ function BrowseBookListItem({ book, onPress, t }: BrowseBookListItemProps) {
 export function BrowseScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
+  const [searchText, setSearchText] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [page, setPage] = useState(1);
   const [books, setBooks] = useState<Book[]>([]);
-  const { data, loading, error, refetch } = useBooks({ page });
+  const { data, loading, error, refetch } = useBooks({
+    page,
+    query: debouncedQuery || undefined,
+  });
 
   useScreenTitle('navigation.browse');
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDebouncedQuery(searchText.trim());
+    }, SEARCH_DEBOUNCE_MS);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchText]);
+
+  useEffect(() => {
+    setPage(1);
+    setBooks([]);
+  }, [debouncedQuery]);
 
   useEffect(() => {
     if (!data?.books) {
@@ -134,6 +155,10 @@ export function BrowseScreen() {
     refetch();
   }, [refetch]);
 
+  const handleClearSearch = useCallback(() => {
+    setSearchText('');
+  }, []);
+
   const renderBookItem = useCallback<ListRenderItem<Book>>(
     ({ item }) => (
       <BrowseBookListItem book={item} onPress={handlePressBook} t={t} />
@@ -154,25 +179,42 @@ export function BrowseScreen() {
   );
 
   return (
-    <FlatList
-      contentContainerStyle={[
-        styles.list,
-        books.length === 0 && styles.emptyContainer,
-      ]}
-      data={books}
-      keyExtractor={item => item.id}
-      onEndReached={handleLoadMore}
-      onEndReachedThreshold={0.4}
-      ListEmptyComponent={renderListEmptyComponent}
-      ListFooterComponent={
-        <BrowseListFooter isLoading={loading && books.length > 0} t={t} />
-      }
-      renderItem={renderBookItem}
-    />
+    <View style={styles.container}>
+      <SearchInput
+        clearAccessibilityLabel={t('browse.clearSearch')}
+        onChangeText={setSearchText}
+        onClear={handleClearSearch}
+        placeholder={t('browse.searchPlaceholder')}
+        value={searchText}
+      />
+      <FlatList
+        contentContainerStyle={[
+          styles.list,
+          books.length === 0 && styles.emptyContainer,
+        ]}
+        data={books}
+        keyboardShouldPersistTaps="handled"
+        keyExtractor={item => item.id}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.4}
+        ListEmptyComponent={renderListEmptyComponent}
+        ListFooterComponent={
+          <BrowseListFooter isLoading={loading && books.length > 0} t={t} />
+        }
+        renderItem={renderBookItem}
+        style={styles.listFlex}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  listFlex: {
+    flex: 1,
+  },
   centered: {
     flex: 1,
     alignItems: 'center',

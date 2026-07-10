@@ -18,7 +18,9 @@
     "title": "Explorar libros",
     "subtitle": "Encuentra tu próxima gran lectura",
     "empty": "No se encontraron libros.",
-    "loadMore": "Cargando más libros..."
+    "loadMore": "Cargando más libros...",
+    "searchPlaceholder": "Buscar por título o autor",
+    "clearSearch": "Borrar búsqueda"
   },
   "bookDetails": {
     "title": "Detalles del libro",

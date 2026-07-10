@@ -13,7 +13,7 @@ export function BrowseTabIcon({ color, size }: TabIconProps) {
 }
 
 export function CartTabIcon({ color, size }: TabIconProps) {
-  const itemCount = useCartStore((state) => getCartItemCount(state.items));
+  const itemCount = useCartStore(state => getCartItemCount(state.items));
 
   return (
     <View style={styles.container}>
