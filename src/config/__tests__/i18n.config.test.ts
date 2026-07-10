@@ -1,6 +1,6 @@
-import i18n from '../src/i18n';
+import i18n from '../i18n.config';
 
-describe('i18n', () => {
+describe('i18n.config', () => {
   it('initializes with English as the fallback language', () => {
     expect(i18n.language).toBe('en');
   });
