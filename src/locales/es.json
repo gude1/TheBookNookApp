@@ -29,5 +29,10 @@
   "checkout": {
     "title": "Pagar",
     "subtitle": "Revisa tu pedido y completa tu compra."
+  },
+  "language": {
+    "label": "Idioma",
+    "english": "Inglés",
+    "spanish": "Español"
   }
 }

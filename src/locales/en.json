@@ -29,5 +29,10 @@
   "checkout": {
     "title": "Checkout",
     "subtitle": "Review your order and complete your purchase."
+  },
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "spanish": "Spanish"
   }
 }

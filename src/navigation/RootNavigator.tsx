@@ -9,7 +9,10 @@ import {
   CheckoutScreen,
 } from '@/screens';
 
+import { sharedScreenOptions } from './screenOptions';
+
 const MainTabs = createBottomTabNavigator({
+  screenOptions: sharedScreenOptions,
   screens: {
     Browse: BrowseScreen,
     Cart: CartScreen,
@@ -17,6 +20,7 @@ const MainTabs = createBottomTabNavigator({
 });
 
 export const RootStack = createNativeStackNavigator({
+  screenOptions: sharedScreenOptions,
   screens: {
     MainTabs: {
       screen: MainTabs,

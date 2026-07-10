@@ -15,6 +15,7 @@ export function BrowseScreen() {
       <Text style={styles.title}>{t('browse.title')}</Text>
       <Text style={styles.subtitle}>{t('browse.subtitle')}</Text>
       <Button
+        style={styles.button}
         onPress={() =>
           navigation.navigate('BookDetails', { bookId: 'sample-book-1' })
         }
@@ -42,5 +43,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     opacity: 0.7,
+  },
+  button: {
+    marginTop: 24,
   },
 });

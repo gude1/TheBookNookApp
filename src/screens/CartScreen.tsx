@@ -14,7 +14,10 @@ export function CartScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>{t('cart.title')}</Text>
       <Text style={styles.subtitle}>{t('cart.empty')}</Text>
-      <Button onPress={() => navigation.navigate('Checkout')}>
+      <Button
+        style={styles.button}
+        onPress={() => navigation.navigate('Checkout')}
+      >
         {t('checkout.title')}
       </Button>
     </View>
@@ -38,5 +41,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     opacity: 0.7,
+  },
+  button: {
+    marginTop: 24,
   },
 });
