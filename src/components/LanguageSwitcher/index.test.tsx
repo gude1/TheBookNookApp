@@ -19,7 +19,7 @@ describe('LanguageSwitcher', () => {
 
     const json = JSON.stringify(tree!.toJSON());
     expect(json).toContain('English');
-    expect(json).toContain('▾');
+    expect(json).toContain('chevron-down');
   });
 
   it('renders a compact select for the header variant', async () => {

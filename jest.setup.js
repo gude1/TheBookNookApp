@@ -2,6 +2,23 @@ import '@/config';
 
 const mockStorage = new Map();
 
+jest.mock('@react-native-vector-icons/ionicons/static', () => {
+  const React = require('react');
+  const { Text } = require('react-native');
+
+  return {
+    Ionicons: ({ name, accessibilityLabel, ...props }) =>
+      React.createElement(
+        Text,
+        {
+          ...props,
+          accessibilityLabel: accessibilityLabel ?? name,
+        },
+        name,
+      ),
+  };
+});
+
 jest.mock('@react-native-async-storage/async-storage', () => ({
   __esModule: true,
   default: {

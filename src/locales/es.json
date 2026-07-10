@@ -25,15 +25,26 @@
     "placeholder": "Los detalles del libro {{bookId}} aparecerán aquí.",
     "byAuthor": "Por {{author}}",
     "reviews": "{{count}} reseñas",
-    "notFound": "No pudimos encontrar este libro."
+    "notFound": "No pudimos encontrar este libro.",
+    "addToCart": "Agregar al carrito"
   },
   "cart": {
     "title": "Tu carrito",
-    "empty": "Tu carrito está vacío."
+    "empty": "Tu carrito está vacío.",
+    "quantity": "Cant.",
+    "remove": "Eliminar",
+    "increaseQuantity": "Aumentar cantidad",
+    "decreaseQuantity": "Disminuir cantidad",
+    "total": "Total: {{amount}}",
+    "checkout": "Ir a pagar"
   },
   "checkout": {
     "title": "Pagar",
-    "subtitle": "Revisa tu pedido y completa tu compra."
+    "subtitle": "Revisa tu pedido y completa tu compra.",
+    "orderSummary": "Resumen del pedido",
+    "placeOrder": "Realizar pedido",
+    "success": "¡Gracias! Tu pedido ha sido realizado.",
+    "empty": "Tu carrito está vacío. Agrega libros antes de pagar."
   },
   "language": {
     "label": "Idioma",

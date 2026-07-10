@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { Ionicons } from '@react-native-vector-icons/ionicons/static';
 
 import { useLanguageStore } from '@/store';
 import {
@@ -49,7 +50,12 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
         <Text style={[styles.triggerText, isHeader && styles.headerTriggerText]}>
           {t(LANGUAGE_LABEL_KEYS[language])}
         </Text>
-        <Text style={[styles.chevron, isHeader && styles.headerChevron]}>▾</Text>
+        <Ionicons
+          color="#666666"
+          name="chevron-down"
+          size={isHeader ? 14 : 16}
+          style={styles.chevron}
+        />
       </Pressable>
 
       <Modal
@@ -137,12 +143,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   chevron: {
-    fontSize: 14,
-    color: '#666666',
     marginStart: 8,
-  },
-  headerChevron: {
-    fontSize: 12,
   },
   backdrop: {
     flex: 1,

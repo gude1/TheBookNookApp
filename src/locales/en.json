@@ -25,15 +25,26 @@
     "placeholder": "Details for book {{bookId}} will appear here.",
     "byAuthor": "By {{author}}",
     "reviews": "{{count}} reviews",
-    "notFound": "We could not find this book."
+    "notFound": "We could not find this book.",
+    "addToCart": "Add to Cart"
   },
   "cart": {
     "title": "Your Cart",
-    "empty": "Your cart is empty."
+    "empty": "Your cart is empty.",
+    "quantity": "Qty",
+    "remove": "Remove",
+    "increaseQuantity": "Increase quantity",
+    "decreaseQuantity": "Decrease quantity",
+    "total": "Total: {{amount}}",
+    "checkout": "Go to Checkout"
   },
   "checkout": {
     "title": "Checkout",
-    "subtitle": "Review your order and complete your purchase."
+    "subtitle": "Review your order and complete your purchase.",
+    "orderSummary": "Order Summary",
+    "placeOrder": "Place Order",
+    "success": "Thank you! Your order has been placed.",
+    "empty": "Your cart is empty. Add books before checking out."
   },
   "language": {
     "label": "Language",

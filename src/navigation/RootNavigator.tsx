@@ -10,12 +10,23 @@ import {
 } from '@/screens';
 
 import { sharedScreenOptions } from './screenOptions';
+import { BrowseTabIcon, CartTabIcon } from './tabBarIcons';
 
 const MainTabs = createBottomTabNavigator({
   screenOptions: sharedScreenOptions,
   screens: {
-    Browse: BrowseScreen,
-    Cart: CartScreen,
+    Browse: {
+      screen: BrowseScreen,
+      options: {
+        tabBarIcon: BrowseTabIcon,
+      },
+    },
+    Cart: {
+      screen: CartScreen,
+      options: {
+        tabBarIcon: CartTabIcon,
+      },
+    },
   },
 });
 

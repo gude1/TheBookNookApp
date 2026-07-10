@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import {
   ActivityIndicator,
   Image,
@@ -7,10 +8,13 @@ import {
   Text,
   View,
 } from 'react-native';
-import { useTranslation } from 'react-i18next';
 import { useRoute } from '@react-navigation/native';
+import { Ionicons } from '@react-native-vector-icons/ionicons/static';
+import { useTranslation } from 'react-i18next';
 
+import { BookPrice } from '@/components/BookPrice';
 import { useBookDetails, useScreenTitle } from '@/hooks';
+import { useCartStore } from '@/store';
 import type { BookDetailsRouteProp } from '@/types';
 
 export function BookDetailsScreen() {
@@ -18,8 +22,15 @@ export function BookDetailsScreen() {
   const route = useRoute<BookDetailsRouteProp>();
   const { bookId } = route.params;
   const { data, loading, error, refetch } = useBookDetails(bookId);
+  const addItem = useCartStore(state => state.addItem);
 
   useScreenTitle('navigation.bookDetails');
+
+  const handleAddToCart = useCallback(() => {
+    if (data) {
+      addItem(data);
+    }
+  }, [addItem, data]);
 
   if (loading) {
     return (
@@ -33,7 +44,9 @@ export function BookDetailsScreen() {
   if (error || !data) {
     return (
       <View style={styles.centered}>
-        <Text style={styles.errorText}>{error ?? t('bookDetails.notFound')}</Text>
+        <Text style={styles.errorText}>
+          {error ?? t('bookDetails.notFound')}
+        </Text>
         <Pressable onPress={refetch} style={styles.retryButton}>
           <Text style={styles.retryText}>{t('common.retry')}</Text>
         </Pressable>
@@ -55,8 +68,12 @@ export function BookDetailsScreen() {
       <Text style={styles.meta}>
         {t('bookDetails.reviews', { count: data.reviewCount })} · {data.rating}
       </Text>
-      <Text style={styles.price}>${data.price.toFixed(2)}</Text>
+      <BookPrice price={data.price} style={styles.price} />
       <Text style={styles.description}>{data.description}</Text>
+      <Pressable onPress={handleAddToCart} style={styles.addToCartButton}>
+        <Ionicons color="#ffffff" name="cart-outline" size={18} />
+        <Text style={styles.addToCartText}>{t('bookDetails.addToCart')}</Text>
+      </Pressable>
     </ScrollView>
   );
 }
@@ -98,13 +115,29 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
-    fontWeight: '700',
     marginBottom: 16,
   },
   description: {
     fontSize: 16,
     lineHeight: 24,
     textAlign: 'center',
+    marginBottom: 24,
+  },
+  addToCartButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    paddingHorizontal: 24,
+    paddingVertical: 14,
+    borderRadius: 8,
+    backgroundColor: '#1a1a1a',
+    minWidth: 200,
+  },
+  addToCartText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
   },
   statusText: {
     marginTop: 12,
