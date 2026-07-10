@@ -1,4 +1,4 @@
-import type { RouteProp } from '@react-navigation/native';
+import type { NavigatorScreenParams, RouteProp } from '@react-navigation/native';
 
 export type MainTabParamList = {
   Browse: undefined;
@@ -6,7 +6,7 @@ export type MainTabParamList = {
 };
 
 export type RootStackParamList = {
-  MainTabs: undefined;
+  MainTabs: NavigatorScreenParams<MainTabParamList> | undefined;
   BookDetails: { bookId: string };
   Checkout: undefined;
 };

@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 
 import { BookPrice } from '@/components/BookPrice';
 import { useBookDetails, useScreenTitle } from '@/hooks';
-import { useCartStore } from '@/store';
+import { useCartIconAnimationStore, useCartStore } from '@/store';
 import type { BookDetailsRouteProp } from '@/types';
 
 export function BookDetailsScreen() {
@@ -23,14 +23,16 @@ export function BookDetailsScreen() {
   const { bookId } = route.params;
   const { data, loading, error, refetch } = useBookDetails(bookId);
   const addItem = useCartStore(state => state.addItem);
+  const triggerCartBump = useCartIconAnimationStore(state => state.triggerBump);
 
   useScreenTitle('navigation.bookDetails');
 
   const handleAddToCart = useCallback(() => {
     if (data) {
       addItem(data);
+      triggerCartBump();
     }
-  }, [addItem, data]);
+  }, [addItem, data, triggerCartBump]);
 
   if (loading) {
     return (

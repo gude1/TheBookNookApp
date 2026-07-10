@@ -8,6 +8,7 @@ import {
   CartScreen,
   CheckoutScreen,
 } from '@/screens';
+import { BookDetailsHeaderRight } from '@/components/BookDetailsHeaderRight';
 
 import { sharedScreenOptions } from './screenOptions';
 import { BrowseTabIcon, CartTabIcon } from './tabBarIcons';
@@ -39,7 +40,12 @@ export const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
-    BookDetails: BookDetailsScreen,
+    BookDetails: {
+      screen: BookDetailsScreen,
+      options: {
+        headerRight: BookDetailsHeaderRight,
+      },
+    },
     Checkout: CheckoutScreen,
   },
 });

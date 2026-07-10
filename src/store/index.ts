@@ -4,3 +4,4 @@ export {
   getCartTotalPrice,
   useCartStore,
 } from './useCartStore';
+export { useCartIconAnimationStore } from './useCartIconAnimationStore';

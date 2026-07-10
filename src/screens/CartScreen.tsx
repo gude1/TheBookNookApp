@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import {
   FlatList,
   ListRenderItem,
@@ -32,12 +32,6 @@ export function CartScreen() {
   const totalPrice = useMemo(() => getCartTotalPrice(items), [items]);
 
   useScreenTitle('navigation.cart');
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      tabBarBadge: itemCount > 0 ? itemCount : undefined,
-    });
-  }, [itemCount, navigation]);
 
   const handleIncrement = useCallback(
     (bookId: string) => {
