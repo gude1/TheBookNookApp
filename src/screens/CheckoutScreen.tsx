@@ -34,8 +34,8 @@ function CheckoutSummaryItem({ item }: { item: CartItemType }) {
 
 export function CheckoutScreen() {
   const { t } = useTranslation();
-  const items = useCartStore((state) => state.items);
-  const clearCart = useCartStore((state) => state.clearCart);
+  const items = useCartStore(state => state.items);
+  const clearCart = useCartStore(state => state.clearCart);
   const [orderPlaced, setOrderPlaced] = useState(false);
 
   const cartItems = useMemo(() => Object.values(items), [items]);
@@ -75,7 +75,7 @@ export function CheckoutScreen() {
       <FlatList
         contentContainerStyle={styles.listContent}
         data={cartItems}
-        keyExtractor={(item) => item.book.id}
+        keyExtractor={item => item.book.id}
         renderItem={renderItem}
       />
       <View style={styles.footer}>

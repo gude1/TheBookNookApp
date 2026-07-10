@@ -1,98 +1,137 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# The Book Nook
 
-# Getting Started
+A React Native mobile app for a small independent bookstore. Customers can browse and search inventory, view book details, manage a shopping cart, and complete a mock checkout.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Built as part of the Bumpa engineering assessment using mock APIs (no backend required).
 
-## Step 1: Start Metro
+## Features
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **Browse** — Paginated book list with lazy-loaded cover images and infinite scroll
+- **Search** — Debounced search by title or author
+- **Book Details** — Fetches a single book on mount with loading, error, and retry states
+- **Cart** — Add/remove items, adjust quantities, live total price, persisted across sessions
+- **Checkout** — Order summary and mock place-order flow
+- **Internationalization** — English and Spanish with device-locale detection and in-app language switcher
+- **Add-to-cart feedback** — Header cart icon jiggle + pulse ring (Reanimated)
+- **Branding** — Custom app icon and splash screen
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Tech stack
+
+| Area          | Choice                                         |
+| ------------- | ---------------------------------------------- |
+| Framework     | React Native 0.86, TypeScript                  |
+| Navigation    | React Navigation 7 (static config)             |
+| State         | Zustand + AsyncStorage persistence             |
+| Data fetching | Custom hooks with `useEffect` (no React Query) |
+| i18n          | i18next + react-i18next                        |
+| Animation     | react-native-reanimated                        |
+| Icons         | @react-native-vector-icons/ionicons            |
+| Splash screen | react-native-bootsplash                        |
+| Testing       | Jest + react-test-renderer                     |
+
+## Technical choices
+
+### State management — Zustand
+
+Cart and language preferences use **Zustand** with the `persist` middleware backed by AsyncStorage. This keeps state logic small and colocated without the boilerplate of Context providers or Redux. Cart totals are derived via pure helper functions (`getCartItemCount`, `getCartTotalPrice`) to avoid stale computed state.
+
+### Data fetching — custom hooks
+
+`useBooks` and `useBookDetails` manage loading, error, and success states with `useEffect` and cleanup on unmount. This matches the assessment focus on component lifecycle and keeps the data layer easy to test without hiding side effects behind a library.
+
+The mock API (`src/api/books.api.ts`) simulates network latency (~400 ms) and supports pagination and search filtering over 60 sample books.
+
+### Navigation — static configuration
+
+React Navigation 7's **static API** is used for type-safe routes and a declarative navigator tree. Screen titles are set from within screens via a small `useScreenTitle` hook, since translation hooks cannot run at module-level config time.
+
+### Performance
+
+- **Pagination** — Books load 20 at a time; the list appends on scroll
+- **Lazy images** — Cover images use React Native's built-in lazy loading
+- **Debounced search** — 300 ms debounce prevents excessive API calls while typing
+
+### Animation
+
+Adding a book to the cart triggers a subtle header cart icon animation (rotation jiggle + expanding ring) using Reanimated shared values. The tab bar cart badge also updates in real time via Zustand subscriptions.
+
+### Testing
+
+45 unit tests cover:
+
+- API layer (pagination, search, not-found)
+- `useBooks` and `useBookDetails` hooks
+- `BookPrice`, `CartItem`, `SearchInput`, and `LanguageSwitcher` components
+- Cart, language, and cart-animation stores
+- i18n configuration and navigation setup
+
+Run the suite with:
 
 ```sh
-# Using npm
+npm test
+```
+
+## Project structure
+
+```
+src/
+├── api/              # Mock API + sample book data
+├── components/       # Reusable UI (BookPrice, CartItem, SearchInput, …)
+├── config/           # i18n setup
+├── hooks/            # useBooks, useBookDetails, useScreenTitle
+├── locales/          # en.json, es.json
+├── navigation/       # Static stack + tab navigators
+├── screens/          # Browse, BookDetails, Cart, Checkout
+├── store/            # Zustand stores (cart, language, animation)
+├── types/            # Shared TypeScript types
+└── utils/            # Device language detection
+```
+
+Path alias: `@/` maps to `src/` (configured in `babel.config.js` and `jest.config.js`).
+
+## Getting started
+
+### Prerequisites
+
+- [React Native development environment](https://reactnative.dev/docs/set-up-your-environment) (Xcode for iOS, Android Studio for Android)
+- Node.js **≥ 22.11**
+- CocoaPods (iOS)
+
+### Install and run
+
+```sh
+# Install JS dependencies
+npm install
+
+# iOS — install CocoaPods (first clone or after native dep changes)
+cd ios
+bundle install          # first time only
+bundle exec pod install
+cd ..
+
+# Start Metro
 npm start
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+# Run on a device/simulator (separate terminal)
 npm run ios
-
-# OR using Yarn
-yarn ios
+# or
+npm run android
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Regenerating assets
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```sh
+# App icon (iOS + Android)
+npm run set-icon
 
-## Step 3: Modify your app
+# Splash screen (iOS + Android)
+npm run generate-bootsplash
+```
 
-Now that you have successfully run the app, let's make changes!
+Both commands use `assets/app-icon.png` as the source image. Rebuild the native app after regenerating assets.
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Assumptions
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-# TheBookNookApp
+- Checkout is a **mock flow** — no real payment processing
+- All book data comes from an in-memory mock API
+- Supported languages: English (`en`) and Spanish (`es`)
