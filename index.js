@@ -2,7 +2,7 @@
  * @format
  */
 
-import './src/config';
+import '@/config';
 
 import { AppRegistry } from 'react-native';
 import App from './App';

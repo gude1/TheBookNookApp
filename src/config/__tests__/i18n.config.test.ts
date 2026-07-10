@@ -1,4 +1,4 @@
-import i18n from '../i18n.config';
+import i18n from '@/config/i18n.config';
 
 describe('i18n.config', () => {
   it('initializes with English as the fallback language', () => {

@@ -3,7 +3,7 @@ import { NativeModules, Platform } from 'react-native';
 import {
   getDeviceLanguage,
   SUPPORTED_LANGUAGES,
-} from '../getDeviceLanguage';
+} from '@/utils/getDeviceLanguage';
 
 describe('getDeviceLanguage', () => {
   const originalPlatform = Platform.OS;

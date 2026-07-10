@@ -1,1 +1,1 @@
-import './src/config';
+import '@/config';
