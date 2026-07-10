@@ -1,0 +1,11 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "retry": "Intentar de nuevo"
+  },
+  "app": {
+    "title": "The Book Nook",
+    "tagline": "Descubre tu próxima gran lectura"
+  }
+}
