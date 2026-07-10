@@ -2,6 +2,19 @@ import '@/config';
 
 const mockStorage = new Map();
 
+jest.mock('react-native-bootsplash', () => ({
+  __esModule: true,
+  default: {
+    hide: jest.fn().mockResolvedValue(undefined),
+    isVisible: jest.fn().mockReturnValue(false),
+    useHideAnimation: jest.fn().mockReturnValue({
+      container: {},
+      logo: { source: 0 },
+      brand: { source: 0 },
+    }),
+  },
+}));
+
 jest.mock('react-native-reanimated', () => {
   const React = require('react');
   const { Image, View } = require('react-native');

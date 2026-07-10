@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "set-icon": "react-native set-icon --path assets/app-icon.png --platform all"
+    "set-icon": "react-native set-icon --path assets/app-icon.png --platform all",
+    "generate-bootsplash": "react-native-bootsplash generate assets/app-icon.png --background=F5F0E8 --logo-width=120 --platforms=android,ios --assets-output=assets/bootsplash --plist=ios/TheBookNookApp/Info.plist"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^3.1.1",
@@ -22,6 +23,7 @@
     "react": "19.2.3",
     "react-i18next": "^17.0.9",
     "react-native": "0.86.0",
+    "react-native-bootsplash": "^7.3.2",
     "react-native-gesture-handler": "^3.0.2",
     "react-native-reanimated": "^4.5.1",
     "react-native-safe-area-context": "^5.8.0",
