@@ -4,6 +4,11 @@ A React Native mobile app for a small independent bookstore. Customers can brows
 
 Built as part of the Bumpa engineering assessment using mock APIs (no backend required).
 
+## Demo
+
+- **Video walkthrough:** [Loom demo](https://www.loom.com/share/09dbd6ebcea941a5a0859791b6db3326)
+- **Release APK:** [Download TheBookNook.apk](https://drive.google.com/file/d/1Q9HcEoBwxQ3e7CqLaJdBht64glo6BCrc/view?usp=sharing)
+
 ## Features
 
 - **Browse** — Paginated book list with lazy-loaded cover images and infinite scroll
