@@ -2,6 +2,8 @@
  * @format
  */
 
+import 'react-native-gesture-handler';
+
 import '@/config';
 
 import { AppRegistry } from 'react-native';

@@ -7,5 +7,27 @@
   "app": {
     "title": "The Book Nook",
     "tagline": "Discover your next great read"
+  },
+  "navigation": {
+    "browse": "Browse",
+    "cart": "Cart",
+    "bookDetails": "Book Details",
+    "checkout": "Checkout"
+  },
+  "browse": {
+    "title": "Browse Books",
+    "subtitle": "Find your next great read"
+  },
+  "bookDetails": {
+    "title": "Book Details",
+    "placeholder": "Details for book {{bookId}} will appear here."
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty."
+  },
+  "checkout": {
+    "title": "Checkout",
+    "subtitle": "Review your order and complete your purchase."
   }
 }
