@@ -16,11 +16,16 @@
   },
   "browse": {
     "title": "Explorar libros",
-    "subtitle": "Encuentra tu próxima gran lectura"
+    "subtitle": "Encuentra tu próxima gran lectura",
+    "empty": "No se encontraron libros.",
+    "loadMore": "Cargando más libros..."
   },
   "bookDetails": {
     "title": "Detalles del libro",
-    "placeholder": "Los detalles del libro {{bookId}} aparecerán aquí."
+    "placeholder": "Los detalles del libro {{bookId}} aparecerán aquí.",
+    "byAuthor": "Por {{author}}",
+    "reviews": "{{count}} reseñas",
+    "notFound": "No pudimos encontrar este libro."
   },
   "cart": {
     "title": "Tu carrito",

@@ -16,11 +16,16 @@
   },
   "browse": {
     "title": "Browse Books",
-    "subtitle": "Find your next great read"
+    "subtitle": "Find your next great read",
+    "empty": "No books found.",
+    "loadMore": "Loading more books..."
   },
   "bookDetails": {
     "title": "Book Details",
-    "placeholder": "Details for book {{bookId}} will appear here."
+    "placeholder": "Details for book {{bookId}} will appear here.",
+    "byAuthor": "By {{author}}",
+    "reviews": "{{count}} reviews",
+    "notFound": "We could not find this book."
   },
   "cart": {
     "title": "Your Cart",
