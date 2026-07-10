@@ -1,8 +1,6 @@
 # The Book Nook
 
-A React Native mobile app for a small independent bookstore. Customers can browse and search inventory, view book details, manage a shopping cart, and complete a mock checkout.
-
-Built as part of the Bumpa engineering assessment using mock APIs (no backend required).
+A React Native mobile app for a small independent bookstore. Customers can browse and search inventory, view book details, manage a shopping cart, and complete a mock checkout. Uses mock APIs — no backend required.
 
 ## Demo
 
@@ -42,7 +40,7 @@ Cart and language preferences use **Zustand** with the `persist` middleware back
 
 ### Data fetching — custom hooks
 
-`useBooks` and `useBookDetails` manage loading, error, and success states with `useEffect` and cleanup on unmount. This matches the assessment focus on component lifecycle and keeps the data layer easy to test without hiding side effects behind a library.
+`useBooks` and `useBookDetails` manage loading, error, and success states with `useEffect` and cleanup on unmount. This keeps the data layer easy to test without hiding side effects behind a library.
 
 The mock API (`src/api/books.api.ts`) simulates network latency (~400 ms) and supports pagination and search filtering over 60 sample books.
 
